@@ -1,9 +1,9 @@
 <?php
+	session_start();
+	$_SESSION['result_avatar'] = array();
 	require_once("view/inc/header.php");
 	require_once("view/inc/menu.php");
 	include 'utils/utils.inc.php';
-
-	session_start();
 
   if (!isset($_GET['module'])) {
 		require_once("./modules/features/controller/controller_features.class.php");

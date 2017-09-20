@@ -1,5 +1,5 @@
 <?php
-function validate_product(){
+function validate_product($value){
 	$filtro = array(
 		'name' => array(
 			'filter'=>FILTER_VALIDATE_REGEXP,
@@ -11,7 +11,7 @@ function validate_product(){
 		),
 
 		'estado' => array(
-      'filter'=>FILTER_CALLBACK,
+    	  	'filter'=>FILTER_CALLBACK,
 			'options'=>'validateestado'
 		),
 
@@ -20,12 +20,12 @@ function validate_product(){
 			'options'=>array('regexp'=>'/^([0-9]{8})*$/')
 		),
 		'cant_prod' => array(
-      'filter'=>FILTER_CALLBACK,
+      		'filter'=>FILTER_CALLBACK,
 			'options'=>'validateprice'
 
 		),
 		'action' => array(
-      'filter'=>FILTER_CALLBACK,
+      	'filter'=>FILTER_CALLBACK,
 			'options'=>'validateaction'
 		),
 		'pago' => array(
@@ -33,10 +33,10 @@ function validate_product(){
 			'options'=>'validatepago'
 		)
 	);
-	$resultado=filter_input_array(INPUT_POST,$filtro);
+	$resultado=filter_var_array($value, $filtro);
 	if(!$resultado['name']){
-		$error['name']='El Nombre no es valido';
-	}if(!$resultado['price']){
+		$error['name']='El nombre no es valido';
+	}if(!$resultado['price']){	
 		$error['price']='El Precio no es valido (+0 -999999) ';
 	}if(!$resultado['estado']){
 		$error['estado']='El Estado no es valido';

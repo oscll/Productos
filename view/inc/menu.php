@@ -20,7 +20,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="top-navbar-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.php?module=products">Top</a></li>
+        <li><a href="index.php?module=products&view=create">Top</a></li>
         <li><a href="index.php?module=features">Features</a></li>
         <li><a href="index.php?module=how-it-works">How it works</a></li>
         <li><a href="index.php?module=testimonials">Testimonials</a></li>
