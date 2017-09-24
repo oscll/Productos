@@ -55,12 +55,12 @@ $(document).ready(function () {
             });
         },
         complete: function (file) {
-            if(file.status == "success"){
+            /* if(file.status == "success"){
             alert("El archivo se ha subido correctamente: " + file.name);
-            }
+            }  */
         },
         error: function (file) {
-            alert("Error subiendo el archivo " + file.name);
+/*             alert("Error subiendo el archivo " + file.name); */        
         },
         removedfile: function (file, serverFileName) {
             var name = file.name;

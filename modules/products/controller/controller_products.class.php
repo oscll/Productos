@@ -51,9 +51,9 @@ function alta_products() {
         $jsondata["success1"] = false;
         if ($result_avatar['resultado']) {
             $jsondata["success1"] = true;
-            $jsondata["img_avatar"] = $result_avatar['datos'];
+            $jsondata["img_avatar"] = $_SERVER['DOCUMENT_ROOT'];
         }
-        header('HTTP/1.0 400 Bad error');
+        header('HTTP/1.0 402 Bad error');
         echo json_encode($jsondata);
         //exit;
     }

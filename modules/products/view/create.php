@@ -1,6 +1,6 @@
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script>
-<!-- <script type="text/javascript" src="view/js/dropzone.min.js"></script>
- --><link rel="stylesheet" type="text/css" href="view/css/dropzone.css">
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script> -->
+<script type="text/javascript" src="view/js/dropzone.min.js"></script>
+<link rel="stylesheet" type="text/css" href="view/css/dropzone.css">
 <script src="view/js/jquery.form.js"></script>
 <script type="text/javascript" src="modules/products/view/js/products.js" ></script>
   <h2>Productos formulario</h2>
