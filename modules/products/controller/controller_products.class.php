@@ -3,6 +3,7 @@ session_start();
 //include  with absolute route
 include ($_SERVER['DOCUMENT_ROOT'] . "/Productos/modules/products/utils/functions_products.inc.php");
 include ($_SERVER['DOCUMENT_ROOT'] . "/Productos/utils/upload.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/Productos/utils/common.inc.php");
 
 //////////////////////////////////////////////////////////////// upload
 if ((isset($_GET["upload"])) && ($_GET["upload"] == true)) {
@@ -30,7 +31,18 @@ function alta_products() {
     if (($result['resultado']) && ($result_avatar['resultado'])) {
         $datos=$result['datos'];
         $datos['avatar'] =$result_avatar['datos'];
-        $mensaje = "product has been successfully registered";
+
+        /////////////////insert into BD////////////////////////
+        
+        $arrValue = false;
+        $path_model = $_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
+        $arrValue = loadModel($path_model, "product_model", "create_product", $arrArgument);
+        
+        if ($arrValue)
+            $mensaje = "Su registro se ha efectuado correctamente, para finalizar compruebe que ha recibido un correo de validacion y siga sus instrucciones";
+        else
+            $mensaje = "No se ha podido realizar su alta. Intentelo mas tarde";
+
         //redirigir a otra p�gina con los datos de $arrArgument y $mensaje
         $_SESSION['product'] = $datos;
         $_SESSION['msje'] = $mensaje;

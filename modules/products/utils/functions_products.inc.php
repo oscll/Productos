@@ -5,6 +5,10 @@ function validate_product($value){
 			'filter'=>FILTER_VALIDATE_REGEXP,
 			'options'=>array('regexp'=>'/^.{2,30}\s*$/')
 		),
+		'text_prod' => array(
+			'filter'=>FILTER_VALIDATE_REGEXP,
+			'options'=>array('regexp'=>'/^.{2,200}\s*$/')
+		),
 		'price' => array(
 			'filter'=>FILTER_CALLBACK,
 			'options'=>'validateprice'
@@ -36,6 +40,8 @@ function validate_product($value){
 	$resultado=filter_var_array($value, $filtro);
 	if(!$resultado['name']){
 		$error['name']='El nombre no es valido';
+	}if(!$resultado['text_prod']){
+		$error['text_prod']='El text_prod no es valido';
 	}if(!$resultado['price']){	
 		$error['price']='El Precio no es valido (+0 -999999) ';
 	}if(!$resultado['estado']){

@@ -9,10 +9,16 @@ $(document).ready(function () {
                 //alert(response.product);
                 if (response.product === "") {
                     $("#name").val("");
+                    $("#text_prod").val("");
                     $("#price").val("");
                     $("#cod_prod").val("");
                     $("#cant_prod").val("");
-                    var pago = response.product.pago;
+                    var inputButton = document.getElementsByClassName('actionButton');
+                    for (var i = 0; i < inputButton.length; i++) {
+                        if (inputButton[i].checked) {
+                            inputButton[i].checked = false;
+                        }
+                    }
                     var inputElements = document.getElementsByClassName('pagoCheckbox');
                     for (var i = 0; i < inputElements.length; i++) {
                         if (inputElements[i].checked) {
@@ -21,11 +27,18 @@ $(document).ready(function () {
                     }
                 } else {
                     $("#name").val( response.product.name);
+                    $("#text_prod").val( response.product.text_prod);
                     $("#price").val( response.product.price);
                     $("#estado").val( response.product.estado);
                     $("#cod_prod").val( response.product.cod_prod);
                     $("#cant_prod").val( response.product.cant_prod);
-                    $("#action").val( response.product.action);
+                    var action = response.product.action
+                    var inputButton = document.getElementsByClassName('actionButton');
+                    for (var i = 0; i < inputButton.length; i++) {
+                        if (action === inputButton) {
+                            inputButton[i].checked = true;
+                        }
+                    }
                     var pago = response.product.pago;
                     var inputElements = document.getElementsByClassName('pagoCheckbox');
                     for (var i = 0; i < pago.length; i++) {
@@ -96,6 +109,7 @@ $(document).ready(function () {
         }
     });
 
+    var v_text_prod =document.getElementById('text_prod').value.trim().length;
     var name_reg = /^[0-9a-zA-Z]{2,30}\s*$/; 
     var price_reg =/^([0-9]*[.])[0-9]+/;
     var cod_prod_reg = /^([0-9]{8})*$/;
@@ -118,6 +132,13 @@ $(document).ready(function () {
                 return false;
             }
     
+        }
+    });
+
+    $("#text_prod").keyup(function () {
+        if (v_text_prod) {
+            $(".error").fadeOut();
+            return false;
         }
     });
 
@@ -170,11 +191,18 @@ function validate_product(){
     var result = true;
 
     var name = document.getElementById('name').value;
+    var text_prod = document.getElementById('text_prod').value;
     var price = document.getElementById('price').value;
     var estado = document.getElementById('estado').value;
     var cod_prod = document.getElementById('cod_prod').value;
     var cant_prod = document.getElementById('cant_prod').value;
-    var action= document.getElementById('action').value;
+    var action;
+    var inputButton = document.getElementsByClassName('actionButton');
+    for (var i = 0; i < inputButton.length; i++) {
+        if (inputButton[i].checked) {
+            action = inputButton[i].value;
+        }
+    }
 
     var pago = [];
     var inputElements = document.getElementsByClassName('pagoCheckbox');
@@ -186,7 +214,7 @@ function validate_product(){
         }
     }
 
-
+    var v_text_prod =document.getElementById('text_prod').value.trim().length;
     var name_reg = /^[0-9a-zA-Z]{2,30}\s*$/; 
     var price_reg =/^([0-9]*[.])[0-9]+/;
     var cod_prod_reg = /^([0-9]{8})*$/;
@@ -201,6 +229,16 @@ function validate_product(){
        return false;
     } else if (!name_reg.test($("#name").val())) {
        $("#name").focus().after("<span class='error'>Error format name (example).</span>");
+       result = false;
+       return false;
+    }
+
+    if ($("#text_prod").val() == "") {
+       $("#text_prod").focus().after("<span class='error'>Introduce una descripcion</span>");
+       result = false;
+       return false;
+    } else if (!v_text_prod) {
+       $("#text_prod").focus().after("<span class='error'>Error format description.</span>");
        result = false;
        return false;
     } 
@@ -263,7 +301,7 @@ function validate_product(){
     console.log("log = "+result);
     if(result){
         var data = {
-            "name":name, "price":price, "estado":estado, "cod_prod":cod_prod, "cant_prod":cant_prod, "action":action, "pago":pago
+            "name":name, "text_prod":text_prod, "price":price, "estado":estado, "cod_prod":cod_prod, "cant_prod":cant_prod, "action":action, "pago":pago
         };
         console.log(data);
         var data_products_JSON = JSON.stringify(data);
@@ -290,6 +328,8 @@ function validate_product(){
             if(xhr.responseJSON.error != null){
                 if (xhr.responseJSON.error.name)
                     $("#name").focus().after("<span  class='styerror'>" + xhr.responseJSON.error.name + "</span>");
+                if (xhr.responseJSON.error.text_prod)
+                    $("#text_prod").focus().after("<span  class='styerror'>" + xhr.responseJSON.error.text_prod + "</span>");
                 if (xhr.responseJSON.error.price)
                     $("#price").focus().after("<span  class='styerror'>" + xhr.responseJSON.error.price + "</span>");
                 if (xhr.responseJSON.error.estado)

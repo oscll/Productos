@@ -34,6 +34,10 @@ function pintar_product(data) {
     name.innerHTML = "name = ";
     name.innerHTML += data.product.name;
 
+    var text_prod = document.createElement("div");
+    text_prod.innerHTML = "text_prod = ";
+    text_prod.innerHTML += data.product.text_prod;
+
     var price = document.createElement("div");
     price.innerHTML = "price = ";
     price.innerHTML += data.product.price;
@@ -73,6 +77,7 @@ function pintar_product(data) {
     div_product.appendChild(parrafo);
     parrafo.appendChild(msje);
     parrafo.appendChild(name);
+    parrafo.appendChild(text_prod);
     parrafo.appendChild(price);
     parrafo.appendChild(estado);
     parrafo.appendChild(cod_prod);

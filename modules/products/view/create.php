@@ -5,12 +5,17 @@
 <script type="text/javascript" src="modules/products/view/js/products.js" ></script>
   <h2>Productos formulario</h2>
   <form  id="form_user" method="POST"><!-- action="index.php?module=products" -->
-  <ul class="ul_form">
-    <li type="disk"><br/>
+  <ul class="ul_form" type="none">
+    <li><br/>
       <label for="name">Nombre Producto:</label>
       <input type="text"  id="name" placeholder="Enter Name" name="name">
       <span id="name" class="styerror"></span>
     </li><br/>
+    <li>
+      <label for="text_prod">Descripcion Producto:</label>
+      <textarea cols="35" rows="5" id="text_prod" name="text_prod" placeholder="text_prod" ></textarea>
+      <span id="text_prod" class="styerror"></span>
+    </li>
     <li>
       <label for="price">Precio Producto:</label>
       <input type="text"  id="price" placeholder="Enter Price" name="price" value="">
@@ -39,8 +44,8 @@
     <li>
       <label for="action">Accion Productos:</label>
       <ul>
-        <li><label for=""><input type="radio"  id="action" name="action" value="buy" > Comprar</label></li>
-        <li><label for=""><input type="radio"  id="action" name="action" value="sell" > Vender</label></li>
+        <li><label for=""><input type="radio"  id="action" class="actionButton" name="action" value="buy" > Comprar</label></li>
+        <li><label for=""><input type="radio"  id="action" class="actionButton" name="action" value="sell" > Vender</label></li>
       </ul>
       <span id="action2" class="styerror"></span>
     </li><br/>
