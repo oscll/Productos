@@ -3,7 +3,6 @@ class productDAO {
     static $_instance;
 
     private function __construct() {
-        
     }
 
     public static function getInstance() {
@@ -13,14 +12,11 @@ class productDAO {
     }
     
     public function create_product_DAO($db, $arrArgument) {
-        $pago = $arrArgument['pago'].implode(",");
-        header('HTTP/1.0 402 Bad error');
-        echo json_encode("hola".$pago);
+        $pago = implode(",", $arrArgument['pago']);
         $sql = "INSERT INTO products (name, text_prod, price, estado,"
-                            . " cod_prod, cant_prod, action, pago"
-                            . " ) VALUES ('".$arrArgument['name']."', '".$arrArgument['text_prod']."', '".$arrArgument['price']."',"
-                            . " '".$arrArgument['cod_prod']."', '".$arrArgument['cant_prod']."', '".$arrArgument['action']."', '".$arrArgument['pago']."')";
-
+                            . " cod_prod, cant_prod, action, pago, avatar"
+                            . " ) VALUES ('".$arrArgument['name']."', '".$arrArgument['text_prod']."', '".$arrArgument['price']."','".$arrArgument['estado']."',"
+                            . " '".$arrArgument['cod_prod']."', '".$arrArgument['cant_prod']."', '".$arrArgument['action']."', '".$pago."', '".$arrArgument['avatar']."')";
         return $db->ejecutar($sql);
     }
 }

@@ -36,7 +36,7 @@ function alta_products() {
         
         $arrValue = false;
         $path_model = $_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
-        $arrValue = loadModel($path_model, "product_model", "create_product", $arrArgument);
+        $arrValue = loadModel($path_model, "product_model", "create_product", $datos);
         
         if ($arrValue)
             $mensaje = "Su registro se ha efectuado correctamente, para finalizar compruebe que ha recibido un correo de validacion y siga sus instrucciones";
@@ -65,7 +65,7 @@ function alta_products() {
             $jsondata["success1"] = true;
             $jsondata["img_avatar"] = $_SERVER['DOCUMENT_ROOT'];
         }
-        header('HTTP/1.0 402 Bad error');
+        header('HTTP/1.0 403 Bad error');
         echo json_encode($jsondata);
         //exit;
     }

@@ -41,8 +41,12 @@
         }
     
         private function conectar() {
-            $this->link = new mysqli($this->servidor, $this->usuario, $this->password);
-            $this->link->select_db($this->base_datos);
+            $this->link = new mysqli($this->servidor, $this->usuario, $this->password);// 
+            if ($this->link->connect_errno) {
+                echo json_encode("Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error);
+                header('HTTP/1.0 403 Bad error');
+            }
+            $this->link->select_db($this->base_datos);     
         }
     
         public function ejecutar($sql) {

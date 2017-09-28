@@ -13,5 +13,8 @@ CREATE TABLE `products` (
   `cant_prod` varchar(255) NOT NULL,
   `action` varchar(255) NOT NULL,
   `pago` varchar(255) NOT NULL,
+  `avatar` varchar(255) NOT NULL,
   PRIMARY KEY (`cod_prod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO products (name, text_prod, price, estado, cod_prod, cant_prod, action, pago) VALUES ('name', 'text_prod', 'price', 'estado' ,'cod_prod', 'cant_prod','action', 'pago')";

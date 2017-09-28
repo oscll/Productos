@@ -7,7 +7,7 @@ $(document).ready(function () {
      $.get("modules/products/controller/controller_products.class.php?load_data=true",
             function (response) {
                 //alert(response.product);
-                if (response.product === "") {
+                if (response.product == "") {
                     $("#name").val("");
                     $("#text_prod").val("");
                     $("#price").val("");

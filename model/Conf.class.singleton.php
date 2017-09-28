@@ -34,7 +34,7 @@
                 return $this->$property;
             }
         }
-        /*
+        
         public function getUserDB() {
             $var = $this->_userdb;
             return $var;
@@ -54,5 +54,5 @@
             $var = $this->_db;
             return $var;
         }
-        */
+        
     }

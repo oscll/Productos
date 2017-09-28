@@ -15,8 +15,6 @@ class product_bll {
     private function __construct() {
         $this->dao = productDAO::getInstance();
         $this->db = Db::getInstance();
-        header('HTTP/1.0 402 Bad error');
-        echo json_encode("hola1");
     }
 
     public static function getInstance() {
