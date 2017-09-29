@@ -56,7 +56,30 @@
       <input type="checkbox"  name="pago[]"class="pagoCheckbox" value="bitcoin"> Bitcoin
       <input type="checkbox"  name="pago[]"class="pagoCheckbox" value="monero"> Monero
       <span id="pago-error" class="styerror"></span>
-    </li><br/>
+    </li>
+    <br/>
+    <br>
+    <li>
+      <label>Country : </label>
+      <select name="country" id="country">
+			    <option selected>Select country</option>
+      </select>
+      <span id="error_country" class="styerror"></span>
+    </li>
+    <li>
+      <label>Province : </label>
+      <select name="province" id="province">
+			    <option selected>Select province</option>
+      </select>
+      <span id="error_province" class="styerror"></span>
+    </li>
+    <li>
+      <label>City : </label>
+      <select name="city" id="city">
+			    <option selected>Select city</option>
+      </select>
+      <span id="error_city" class="styerror"></span>
+    </li>
   </ul>
   <div class="form-group" id="progress">
     <div id="bar"></div>

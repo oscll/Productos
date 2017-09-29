@@ -1,23 +1,21 @@
-function load_products() {
-    var jqxhr = $.get("modules/products/controller/controller_products.class.php?load=true", function (data) {
+function load_users_ajax() {
+    $.ajax({
+        type: 'GET',
+        url: "modules/products/controller/controller_products.class.php?load=true",
+        //dataType: 'json',
+        async: false
+    }).done(function (data) {
         var json = JSON.parse(data);
-        console.log(json);
+        //alert(json.user.usuario);
         pintar_product(json);
-        //alert( "success" );
-    }).done(function () {
-        //alert( "second success" );
-    }).fail(function () {
-        //alert( "error" );
-    }).always(function () {
-        //alert( "finished" );
-    });
-    jqxhr.always(function () {
-        //alert( "second finished" );
+
+    }).fail(function (xhr) {
+        alert(xhr.responseText);
     });
 }
 
 $(document).ready(function () {
-    load_products();
+    load_users_ajax();
 });
 
 function pintar_product(data) {
@@ -63,6 +61,17 @@ function pintar_product(data) {
     for(var i =0;i < data.product.pago.length;i++){
     pago.innerHTML += " - "+data.product.pago[i];
     }
+    var country = document.createElement("div");
+    country.innerHTML = "country = ";
+    country.innerHTML += data.product.country;
+
+    var province = document.createElement("div");
+    province.innerHTML = "province = ";
+    province.innerHTML += data.product.province;
+
+    var city = document.createElement("div");
+    city.innerHTML = "city = ";
+    city.innerHTML += data.product.city;
     
     //arreglar ruta IMATGE!!!!!
     console.log(data.product.avatar);
@@ -84,6 +93,9 @@ function pintar_product(data) {
     parrafo.appendChild(cant_prod);
     parrafo.appendChild(action);
     parrafo.appendChild(pago);
+    parrafo.appendChild(country);
+    parrafo.appendChild(province);
+    parrafo.appendChild(city);
     content.appendChild(div_product);
     content.appendChild(img);
 }

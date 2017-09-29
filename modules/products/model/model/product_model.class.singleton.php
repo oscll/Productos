@@ -20,4 +20,17 @@ class product_model {
     public function create_product($arrArgument) {
         return $this->bll->create_product_BLL($arrArgument);
     }
+
+    public function obtain_countries($url){
+        return $this->bll->obtain_countries_BLL($url);
+    }
+
+    public function obtain_provinces(){
+        return $this->bll->obtain_provinces_BLL();
+    }
+
+    public Function obtain_cities($arrArgument){
+        return $this->bll->obtain_cities_BLL($arrArgument);
+    }
+
 }

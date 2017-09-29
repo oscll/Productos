@@ -26,4 +26,16 @@ class product_bll {
     public function create_product_BLL($arrArgument) {
         return $this->dao->create_product_DAO($this->db, $arrArgument);
     }
+    
+    public function obtain_countries_BLL($url){
+        return $this->dao->obtain_countries_DAO($url);
+    }
+
+   public function obtain_provinces_BLL(){
+      return $this->dao->obtain_provinces_DAO();
+    }
+
+   public function obtain_cities_BLL($arrArgument){
+      return $this->dao->obtain_cities_DAO($arrArgument);
+    }
 }

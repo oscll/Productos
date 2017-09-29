@@ -35,6 +35,18 @@ function validate_product($value){
 		'pago' => array(
 			'filter'=>FILTER_CALLBACK,
 			'options'=>'validatepago'
+		),
+		'country' => array(
+      	'filter'=>FILTER_CALLBACK,
+			'options'=>'validatecountry'
+		),
+		'province' => array(
+      	'filter'=>FILTER_CALLBACK,
+			'options'=>'validateprovince'
+		),
+		'city' => array(
+      	'filter'=>FILTER_CALLBACK,
+			'options'=>'validatecity'
 		)
 	);
 	$resultado=filter_var_array($value, $filtro);
@@ -54,6 +66,15 @@ function validate_product($value){
 			$error['action']='Debes elegir una';
 	}if(!$resultado['pago']){
 		$error['pago']='Debes elegir uno';
+	}
+	if(!$resultado['country']){
+		$error['country']='You need to choose a country';
+	}
+	if(!$resultado['province']){
+		$error['province']='You need to choose a province';
+	}
+	if(!$resultado['city']){
+		$error['city']='You need to choose a city';
 	}
 		if((empty($error))){
 			return $return=array('resultado'=>true , 'error'=>$error,'datos'=>$resultado);
@@ -93,4 +114,25 @@ function validatepago($texto){
     return $texto;
   }
   return false;
+}
+function validatecountry($texto){
+	if(($texto !== "Select country")||($texto !== "")){
+			return $texto;
+	}else{
+			return false;
+	}
+}
+function validateprovince($texto){
+	if(($texto !== "Select province")||($texto !== "")){
+			return $texto;
+	}else{
+			return false;
+	}
+}
+function validatecity($texto){
+	if(($texto !== "Select city")||($texto !== "")){
+			return $texto;
+	}else{
+			return false;
+	}
 }
