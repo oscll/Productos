@@ -59,6 +59,8 @@
             while ($row = $stmt->fetch_array(MYSQLI_ASSOC)) {
                 array_push($this->array, $row);
             }
+            json_encode($this->array);
+
             return $this->array;
         }
     

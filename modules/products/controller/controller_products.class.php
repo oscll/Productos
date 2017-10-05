@@ -122,7 +122,6 @@ if ((isset($_GET["load_data"])) && ($_GET["load_data"] == true)) {
 /////////////////////////////////////////////////// load_country
 if(  (isset($_GET["load_country"])) && ($_GET["load_country"] == true)  ){
     $json = array();
-
     $url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
     $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
     $json = loadModel($path_model, "product_model", "obtain_countries", $url);
@@ -141,10 +140,8 @@ if(  (isset($_GET["load_country"])) && ($_GET["load_country"] == true)  ){
 if(  (isset($_GET["load_provinces"])) && ($_GET["load_provinces"] == true)  ){
     $jsondata = array();
     $json = array();
-
     $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
     $json = loadModel($path_model, "product_model", "obtain_provinces");
-
     if($json){
         $jsondata["provinces"] = $json;
         echo json_encode($jsondata);
@@ -175,3 +172,57 @@ if(  isset($_POST['idPoblac']) ){
     }
 }
 
+////Frontend/////
+/* if(  (isset($_GET["list_products"])) && ($_GET["list_products"] == true)  ){
+    $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
+    $json = loadModel($path_model, "product_model", "list_products", null);
+    echo json_encode($json);
+    exit;
+} */
+
+////
+if((isset($_GET["list_products"])) && ($_GET["list_products"] == true)){
+    $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
+    if(!isset($_SESSION['limit'])){
+        $_SESSION['limit']=0;
+    }
+    $rows=3;
+    $json = loadModel($path_model, "product_model", "list_products",$_SESSION['limit'].", $rows");
+    $_SESSION['limit']=$_SESSION['limit']+3;
+    echo json_encode($json);
+    exit;
+}
+
+if(  (isset($_GET["details_redirect"])) && ($_GET["details_redirect"]==true)){
+    $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
+    if(validate_codproduct($_POST["item_cod_prod"])){
+        $_SESSION['item_cod_prod'] = $_POST["item_cod_prod"];
+        echo json_encode("index.php?module=products&view=details_product");
+    }else{
+        header('HTTP/1.0 400 Bad error');
+        echo json_encode("false");
+        exit;
+    }
+}
+
+if(  (isset($_GET["details_product"])) && ($_GET["details_product"]==true)){
+    $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
+    if(isset($_SESSION["item_cod_prod"])){
+        $json = loadModel($path_model, "product_model", "details_product", $_SESSION["item_cod_prod"]);
+        echo json_encode($json);
+    }else{
+        header('HTTP/1.0 400 Bad error');
+        echo json_encode("No existe details_product".$_SESSION["item_cod_prod"]);
+        exit;
+    }
+}
+
+if(  (isset($_GET["clear_limit"])) && ($_GET["clear_limit"]==true)){
+    try{
+        $_SESSION['limit']=0;
+    }catch(Exception $e){
+        header('HTTP/1.0 400 Bad error');
+        echo json_encode("No existe details_product".$_SESSION["item_cod_prod"]);
+        exit;
+    }
+}

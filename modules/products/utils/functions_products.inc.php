@@ -136,3 +136,10 @@ function validatecity($texto){
 			return false;
 	}
 }
+
+function validate_codproduct($value){
+	if(preg_match('/^([0-9]{8})*$/',$value)){
+		return true;
+	}
+	return false;
+}

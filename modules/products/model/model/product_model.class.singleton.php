@@ -21,6 +21,14 @@ class product_model {
         return $this->bll->create_product_BLL($arrArgument);
     }
 
+    public function details_product($cod_prod) {
+        return $this->bll->details_product_BLL($cod_prod);
+    }
+
+    public function list_products($limit) {
+        return $this->bll->list_products_BLL($limit);
+    }
+
     public function obtain_countries($url){
         return $this->bll->obtain_countries_BLL($url);
     }

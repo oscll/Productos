@@ -1,101 +1,80 @@
-function load_users_ajax() {
+var contenido;
+var limit_0 = true;
+
+$(document).ready(function () {
+    load_products_ajax();
+    scroll();
+});
+
+function scroll(){
+    $(window).scroll( function() {
+        if(($(document).scrollTop() > (($(document).height()-$(window).height())-$("footer").height()))&&limit_0) {
+            console.log("scroll");
+            load_products_ajax();
+        }
+    });
+}
+
+function load_products_ajax() {
     $.ajax({
         type: 'GET',
-        url: "modules/products/controller/controller_products.class.php?load=true",
+        url: "modules/products/controller/controller_products.class.php?list_products=true",
         //dataType: 'json',
         async: false
     }).done(function (data) {
         var json = JSON.parse(data);
-        //alert(json.user.usuario);
-        pintar_product(json);
-
+        contenido = document.getElementById("list_prod");
+        if(json.length == 0){//si no hay mas items off scroll
+            limit_0 = false;
+            console.log("ksdkfjl");
+            $.ajax({
+                type: 'GET',
+                url: "modules/products/controller/controller_products.class.php?clear_limit=true",
+                async:false
+            }).fail(function (xhr){
+                alert(xhr.responseText);
+            });
+        }else{
+            json.forEach(function(element) {
+                create_html_product(element)
+            }, this);
+        }
     }).fail(function (xhr) {
         alert(xhr.responseText);
     });
 }
 
-$(document).ready(function () {
-    load_users_ajax();
-});
-
-function pintar_product(data) {
-    //alert(data.product.avatar);
-    var content = document.getElementById("content");
-    var div_product = document.createElement("div");
-    var parrafo = document.createElement("p");
-
-    var msje = document.createElement("div");
-    msje.innerHTML = "msje = ";
-    msje.innerHTML += data.msje;
-    
-    var name = document.createElement("div");
-    name.innerHTML = "name = ";
-    name.innerHTML += data.product.name;
-
-    var text_prod = document.createElement("div");
-    text_prod.innerHTML = "text_prod = ";
-    text_prod.innerHTML += data.product.text_prod;
-
-    var price = document.createElement("div");
-    price.innerHTML = "price = ";
-    price.innerHTML += data.product.price;
-    
-    var estado = document.createElement("div");
-    estado.innerHTML = "estado = ";
-    estado.innerHTML += data.product.estado;
-
-    var cod_prod = document.createElement("div");
-    cod_prod.innerHTML = "cod_prod = ";
-    cod_prod.innerHTML += data.product.cod_prod;
-
-    var cant_prod = document.createElement("div");
-    cant_prod.innerHTML = "cant_prod = ";
-    cant_prod.innerHTML += data.product.cant_prod;
-
-    var action = document.createElement("div");
-    action.innerHTML = "action = ";
-    action.innerHTML += data.product.action;
-    
-    var pago = document.createElement("div");
-    pago.innerHTML = "pago = ";
-    for(var i =0;i < data.product.pago.length;i++){
-    pago.innerHTML += " - "+data.product.pago[i];
-    }
-    var country = document.createElement("div");
-    country.innerHTML = "country = ";
-    country.innerHTML += data.product.country;
-
-    var province = document.createElement("div");
-    province.innerHTML = "province = ";
-    province.innerHTML += data.product.province;
-
-    var city = document.createElement("div");
-    city.innerHTML = "city = ";
-    city.innerHTML += data.product.city;
-    
-    //arreglar ruta IMATGE!!!!!
-    console.log(data.product.avatar);
-    var cad = data.product.avatar;
-    //console.log(cad);
-    //var cad = cad.toLowerCase();
-    var img = document.createElement("div");
-    var html = '<img src="' + cad + '" height="75" width="75"> ';
-    img.innerHTML = html;
-    //alert(html);
-
-    div_product.appendChild(parrafo);
-    parrafo.appendChild(msje);
-    parrafo.appendChild(name);
-    parrafo.appendChild(text_prod);
-    parrafo.appendChild(price);
-    parrafo.appendChild(estado);
-    parrafo.appendChild(cod_prod);
-    parrafo.appendChild(cant_prod);
-    parrafo.appendChild(action);
-    parrafo.appendChild(pago);
-    parrafo.appendChild(country);
-    parrafo.appendChild(province);
-    parrafo.appendChild(city);
-    content.appendChild(div_product);
-    content.appendChild(img);
+function create_html_product(item){
+    console.log(item);
+    var aTag = document.createElement("a");
+    aTag.addEventListener("click", function(){
+        console.log(item.cod_prod);
+        $.ajax({
+            type: 'POST',
+            url: "modules/products/controller/controller_products.class.php?details_redirect=true",
+            data: "item_cod_prod="+item.cod_prod,
+            //dataType: 'json',
+            async: false
+        }).done(function (data) {
+            alert(data);
+            window.location.href="index.php?module=products&view=details_product";    
+        }).fail(function (xhr) {
+            alert(xhr.responseText);
+        });
+    });
+    /* aTag.setAttribute("href", "index.php?module=products&details_redirect="+item.cod_prod); */
+    var imgTag = document.createElement("img");
+    imgTag.setAttribute("class", "prodImg");
+    imgTag.setAttribute("src", item.avatar);
+    imgTag.setAttribute("width", "200px");
+    imgTag.setAttribute("height", "200px");
+    imgTag.setAttribute("alt", "Foto Producto");
+    var pTag = document.createElement("p");
+    pTag.innerHTML = item.name;
+    var pTag2 = document.createElement("p");
+    pTag2.innerHTML = item.price;
+    aTag.appendChild(imgTag);
+    aTag.appendChild(pTag);
+    aTag.appendChild(pTag2);
+    contenido.appendChild(aTag);
 }

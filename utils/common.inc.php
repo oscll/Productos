@@ -13,8 +13,12 @@
             if (isset($arrArgument)) { 
                 return $obj->$function($arrArgument);
             }else{
-                header('HTTP/1.0 403 Bad error');
-                echo json_encode("no existe arrArgument");   
+                try{
+                    return $obj->$function();
+                }catch(Exception $e){
+                    header('HTTP/1.0 403 Bad error');
+                    echo json_encode("no existe arrArgument");  
+                } 
             }
         } else {
             die($model_name . ' Model Not Found under Model Folder');
