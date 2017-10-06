@@ -183,9 +183,6 @@ if(  isset($_POST['idPoblac']) ){
 ////
 if((isset($_GET["list_products"])) && ($_GET["list_products"] == true)){
     $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
-    if(!isset($_SESSION['limit'])){
-        $_SESSION['limit']=0;
-    }
     $rows=3;
     $json = loadModel($path_model, "product_model", "list_products",$_SESSION['limit'].", $rows");
     $_SESSION['limit']=$_SESSION['limit']+3;
@@ -197,7 +194,8 @@ if(  (isset($_GET["details_redirect"])) && ($_GET["details_redirect"]==true)){
     $path_model=$_SERVER['DOCUMENT_ROOT'] . '/Productos/modules/products/model/model/';
     if(validate_codproduct($_POST["item_cod_prod"])){
         $_SESSION['item_cod_prod'] = $_POST["item_cod_prod"];
-        echo json_encode("index.php?module=products&view=details_product");
+        $path_detail = "index.php?module=products&view=details_product";
+        echo ($path_detail);//json_encode no se usa por que sale con ""
     }else{
         header('HTTP/1.0 400 Bad error');
         echo json_encode("false");

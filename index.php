@@ -15,7 +15,12 @@
     }
 	}
   if ( (isset($_GET['module'])) && (isset($_GET['view'])) ){
-		require_once("./modules/".$_GET['module']."/view/".$_GET['view'].".php");
+		//require_once("./modules/".$_GET['module']."/view/".$_GET['view'].".php");
+		if (file_exists("./modules/".$_GET['module']."/view/".$_GET['view'].".php")) {
+      require_once("./modules/".$_GET['module']."/view/".$_GET['view'].".php");
+    }else {
+      require_once("./modules/features/controller/controller_features.class.php");
+    }
 	}
 
 require_once("view/inc/footer.php");

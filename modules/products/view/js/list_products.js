@@ -2,12 +2,13 @@ var contenido;
 var limit_0 = true;
 
 $(document).ready(function () {
+    clear_limit();//Por si antes existia $_SESSION['limit']
     load_products_ajax();
     scroll();
 });
 
 function scroll(){
-    $(window).scroll( function() {
+    $(window).scroll( function() {  
         if(($(document).scrollTop() > (($(document).height()-$(window).height())-$("footer").height()))&&limit_0) {
             console.log("scroll");
             load_products_ajax();
@@ -26,21 +27,15 @@ function load_products_ajax() {
         contenido = document.getElementById("list_prod");
         if(json.length == 0){//si no hay mas items off scroll
             limit_0 = false;
-            console.log("ksdkfjl");
-            $.ajax({
-                type: 'GET',
-                url: "modules/products/controller/controller_products.class.php?clear_limit=true",
-                async:false
-            }).fail(function (xhr){
-                alert(xhr.responseText);
-            });
+            clear_limit();
         }else{
             json.forEach(function(element) {
-                create_html_product(element)
+                create_html_product(element)    
             }, this);
         }
     }).fail(function (xhr) {
         alert(xhr.responseText);
+        window.location.href="index.php?module=404";
     });
 }
 
@@ -56,10 +51,10 @@ function create_html_product(item){
             //dataType: 'json',
             async: false
         }).done(function (data) {
-            alert(data);
-            window.location.href="index.php?module=products&view=details_product";    
+            window.location.href=data;    
         }).fail(function (xhr) {
             alert(xhr.responseText);
+            window.location.href="index.php?module=404";
         });
     });
     /* aTag.setAttribute("href", "index.php?module=products&details_redirect="+item.cod_prod); */
@@ -77,4 +72,14 @@ function create_html_product(item){
     aTag.appendChild(pTag);
     aTag.appendChild(pTag2);
     contenido.appendChild(aTag);
+}
+function clear_limit(){
+    $.ajax({
+        type: 'GET',
+        url: "modules/products/controller/controller_products.class.php?clear_limit=true",
+        async:false
+    }).fail(function (xhr){
+        alert(xhr.responseText);
+        window.location.href="index.php?module=404";
+    });
 }
