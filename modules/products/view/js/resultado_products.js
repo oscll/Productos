@@ -1,7 +1,7 @@
 function load_product_ajax() {
     $.ajax({
         type: 'GET',
-        url: "modules/products/controller/controller_products.class.php?load=true",
+        url: "../load/",
         //dataType: 'json',
         async: false
     }).done(function (data) {

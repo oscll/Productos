@@ -1,4 +1,4 @@
-<script type="text/javascript" src="modules/products/view/js/list_products.js" ></script>
+<script type="text/javascript" src=<?php echo PRODUCTS_JS_PATH."list_products.js" ?>></script>
 <div id="content">
     <div id="list_prod" class="row text-center pad-row">
 

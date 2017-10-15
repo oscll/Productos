@@ -5,7 +5,7 @@ $(document).ready(function () {
 function load_product_ajax() {
     $.ajax({
         type: 'GET',
-        url: "modules/products/controller/controller_products.class.php?details_product=true",
+        url: "../details_product/",
         //dataType: 'json',
         async: false
     }).done(function (data) {
@@ -72,7 +72,7 @@ function pintar_product(data) {
     city.innerHTML += data.city;
     
     var img = document.createElement("div");
-    var html = '<img src="' + data.avatar + '" height="75" width="75"> ';
+    var html = '<img src="../../' + data.avatar + '" height="75" width="75" alt="Foto perfil"> ';
     img.innerHTML = html;
     //alert(html);
 

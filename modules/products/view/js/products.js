@@ -3,8 +3,7 @@ $(document).ready(function () {
     $('#SubmitProductos').click(function () {
         validate_product();
     });
-
-    $.get("modules/products/controller/controller_products.class.php?load_data=true",
+    $.get("../load_data_product/",
             function (response) {
                 //alert(response.product);
                 if (response.product == "") {
@@ -58,7 +57,7 @@ $(document).ready(function () {
 
     //Dropzone function //////////////////////////////////
     $("#dropzone").dropzone({
-        url: "modules/products/controller/controller_products.class.php?upload=true",
+        url: "../upload/",
         addRemoveLinks: true,
         maxFileSize: 1000,
         dictResponseError: "Ha ocurrido un error en el server",
@@ -85,8 +84,8 @@ $(document).ready(function () {
             var name = file.name;
             $.ajax({
                 type: "POST",
-                url: "modules/products/controller/controller_products.class.php?delete=true",
-                data: "filename=" + name,
+                url: "../delete_product/",
+                data: {"filename":name},
                 success: function (data) {
                     $("#progress").hide();
                     $('.msg').text('').removeClass('msg_ok');
@@ -97,7 +96,7 @@ $(document).ready(function () {
                         var element;
                         if ((element = file.previewElement) != null) {
                             element.parentNode.removeChild(file.previewElement);
-                            //alert("Imagen eliminada: " + name);
+                            alert("Imagen eliminada: " + name);
                         } else {
                             false;
                         }
@@ -215,7 +214,7 @@ $(document).ready(function () {
 	});
 
 	$("#province").change(function() {
-		var prov = $(this).val();
+        var prov = $(this).val();
 		if(prov > 0){
 			load_cities_v1(prov);
 		}else{
@@ -362,7 +361,7 @@ function validate_product(){
         };
         console.log(data);
         var data_products_JSON = JSON.stringify(data);
-        $.post('modules/products/controller/controller_products.class.php',
+        $.post('../alta_products/',
                 {alta_products_json: data_products_JSON},
         function (response) {
             console.log("1 "+response);
@@ -427,30 +426,31 @@ function load_countries_v2(cad) {
             $("#country").append("<option value='" + valor.sISOCode + "'>" + valor.sName + "</option>");
         });
     })
-    .fail(function() {
+    .fail(function(data) {
         alert( "error load_countries" );
     });
 }
 function load_countries_v1() {
-    $.get( "modules/products/controller/controller_products.class.php?load_country=true",
+    $.get( "../load_country/",
         function( response ) {
             //console.log(response);
             if(response === 'error'){
-                load_countries_v2("resources/ListOfCountryNamesByName.json");
+                load_countries_v2("../../resources/ListOfCountryNamesByName.json");
             }else{
-                load_countries_v2("modules/products/controller/controller_products.class.php?load_country=true"); //oorsprong.org
+                load_countries_v2("../load_country/"); //oorsprong.org
             }
     })
     .fail(function(response) {
-        load_countries_v2("resources/ListOfCountryNamesByName.json");
+        load_countries_v2("../../resources/ListOfCountryNamesByName.json");
     });
 }
 
 function load_provinces_v2() {
-    $.get("resources/provinciasypoblaciones.xml", function (xml) {
+    $.get("../../resources/provinciasypoblaciones.xml", function (xml) {
 	    $("#province").empty();
 	    $("#province").append('<option value="" selected="selected">Select province</option>');
         $(xml).find("provincia").each(function () {
+            console.log(this);
             var id = $(this).attr('id');
             var name = $(this).find('nombre').text();
             $("#province").append("<option value='" + id + "'>" + name + "</option>");
@@ -462,12 +462,11 @@ function load_provinces_v2() {
 }
 
 function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
-    $.get( "modules/products/controller/controller_products.class.php?load_provinces=true",
+    $.get( "../load_provinces/",
         function( response ) {
             $("#province").empty();
 	        $("#province").append('<option value="" selected="selected">Select province</option>');
-            //alert(response);
-        var json = JSON.parse(response);
+            var json = JSON.parse(response);
 		    var provinces=json.provinces;
 		    //alert(provinces);
 		    //console.log(provinces);
@@ -477,6 +476,7 @@ function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
                 load_provinces_v2();
             }else{
                 for (var i = 0; i < provinces.length; i++) {
+                    console.log(provinces[i]);
         		    $("#province").append("<option value='" + provinces[i].id + "'>" + provinces[i].nombre + "</option>");
     		    }
             }
@@ -487,7 +487,7 @@ function load_provinces_v1() { //provinciasypoblaciones.xml - xpath
 }
 
 function load_cities_v2(prov) {
-    $.get("resources/provinciasypoblaciones.xml", function (xml) {
+    $.get("../../resources/provinciasypoblaciones.xml", function (xml) {
 		$("#city").empty();
 	    $("#city").append('<option value="" selected="selected">Select city</option>');
 		$(xml).find('provincia[id=' + prov + ']').each(function(){
@@ -503,8 +503,7 @@ function load_cities_v2(prov) {
 
 function load_cities_v1(prov) { //provinciasypoblaciones.xml - xpath
     var datos = { idPoblac : prov  };
-	$.post("modules/products/controller/controller_products.class.php", datos, function(response) {
-	    //alert(response);
+	$.post("../load_citys/", datos, function(response) {
         var json = JSON.parse(response);
 		var cities=json.cities;
 		//alert(poblaciones);

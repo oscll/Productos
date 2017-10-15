@@ -20,9 +20,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="top-navbar-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.php?module=products&view=list_products">list</a></li>
-        <li><a href="index.php?module=products&view=create">Create</a></li>
-        <li><a href="index.php?module=features">Features</a></li>
+        <li><a href="<?php amigable('?module=products&function=list_products_html'); ?>">list</a></li>
+        <li><a href="<?php amigable('?module=products&function=create_product_html'); ?>">Create</a></li>
+        <li><a href="<?php amigable('?module=main&function=begin'); ?>">Main</a></li>
         <li><a href="index.php?module=how-it-works">How it works</a></li>
         <li><a href="index.php?module=testimonials">Testimonials</a></li>
         <li><a href="index.php?module=about">About</a></li>

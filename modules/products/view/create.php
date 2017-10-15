@@ -1,8 +1,8 @@
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.js"></script> -->
-<script type="text/javascript" src="view/js/dropzone.min.js"></script>
-<link rel="stylesheet" type="text/css" href="view/css/dropzone.css">
-<script src="view/js/jquery.form.js"></script>
-<script type="text/javascript" src="modules/products/view/js/products.js" ></script>
+<script type="text/javascript" src=<?php echo VIEW_JS_PATH."dropzone.min.js"?>></script>
+<link rel="stylesheet" type="text/css" href=<?php echo CSS_PATH."dropzone.css"?>>
+<script src=<?php echo VIEW_JS_PATH."jquery.form.js"?>></script>
+<script type="text/javascript" src=<?php echo PRODUCTS_JS_PATH."/products.js" ?>></script>
   <h2>Productos formulario</h2>
   <form  id="form_user" method="POST"><!-- action="index.php?module=products" -->
   <ul class="ul_form" type="none">

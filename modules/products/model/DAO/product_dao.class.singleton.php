@@ -53,13 +53,13 @@ class productDAO {
   public function obtain_provinces_DAO(){
     $json = array();
     $tmp = array();
-    $provincias = simplexml_load_file($_SERVER['DOCUMENT_ROOT'].'/1_Backend/6_dependent_dropdowns/resources/provinciasypoblaciones.xml');
-    $result = $provincias->xpath("/lista/provincia/nombre | /lista/provincia/@cod_prod");
+    $provincias = simplexml_load_file(RESOURCES.'provinciasypoblaciones.xml');
+    $result = $provincias->xpath("/lista/provincia/nombre | /lista/provincia/@id");
     for ($i=0; $i<count($result); $i+=2) {
       $e=$i+1;
       $provincia=$result[$e];
       $tmp = array(
-        'cod_prod' => (string) $result[$i], 'nombre' => (string) $provincia
+        'id' => (string) $result[$i], 'nombre' => (string) $provincia
       );
       array_push($json, $tmp);
     }
@@ -70,11 +70,11 @@ class productDAO {
     $json = array();
     $tmp = array();
     $filter = (string)$arrArgument;
-    $xml = simplexml_load_file($_SERVER['DOCUMENT_ROOT'].'/1_Backend/6_dependent_dropdowns/resources/provinciasypoblaciones.xml');
-    $result = $xml->xpath("/lista/provincia[@cod_prod='$filter']/localcod_prodades");
+    $xml = simplexml_load_file(RESOURCES.'provinciasypoblaciones.xml');
+    $result = $xml->xpath("/lista/provincia[@id='$filter']/localidades");
     for ($i=0; $i<count($result[0]); $i++) {
       $tmp = array(
-          'poblacion' => (string) $result[0]->localcod_prodad[$i]
+          'poblacion' => (string) $result[0]->localidad[$i]
       );
       array_push($json, $tmp);
     }

@@ -10,12 +10,12 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="view/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="view/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="view/css/animate.css">
-		    <link rel="stylesheet" href="view/css/form-elements.css">
-        <link rel="stylesheet" href="view/css/style.css">
-        <link rel="stylesheet" href="view/css/media-queries.css">
+        <link rel="stylesheet" href=<?php echo VIEW_BOOTSTRAP_PATH."css/bootstrap.min.css" ?>>
+        <link rel="stylesheet" href=<?php echo VIEW_PATH."font-awesome/css/font-awesome.min.css" ?>>
+        <link rel="stylesheet" href=<?php echo CSS_PATH."animate.css" ?>>
+		    <link rel="stylesheet" href=<?php echo CSS_PATH."form-elements.css" ?>>
+        <link rel="stylesheet" href=<?php echo CSS_PATH."style.css" ?>>
+        <link rel="stylesheet" href=<?php echo CSS_PATH."media-queries.css" ?>>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,12 +24,12 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="view/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="view/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="view/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="view/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="view/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href=<?php echo VIEW_PATH."ico/favicon.png"?>>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href=<?php echo VIEW_PATH."ico/apple-touch-icon-144-precomposed.png" ?>>
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href=<?php echo VIEW_PATH."ico/apple-touch-icon-114-precomposed.png" ?>>
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href=<?php echo VIEW_PATH."ico/apple-touch-icon-72-precomposed.png" ?>>
+        <link rel="apple-touch-icon-precomposed" href=<?php echo VIEW_PATH."ico/apple-touch-icon-57-precomposed.png" ?>>
             <!-- jquery -->
-        <script src="view/js/jquery-1.11.1.min.js"></script>
+        <script src=<?php echo VIEW_JS_PATH."/jquery-1.11.1.min.js"?>></script>
 
     </head>

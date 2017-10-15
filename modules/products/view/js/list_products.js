@@ -19,7 +19,7 @@ function scroll(){
 function load_products_ajax() {
     $.ajax({
         type: 'GET',
-        url: "modules/products/controller/controller_products.class.php?list_products=true",
+        url: "../list_products/",
         //dataType: 'json',
         async: false
     }).done(function (data) {
@@ -46,7 +46,7 @@ function create_html_product(item){
         console.log(item.cod_prod);
         $.ajax({
             type: 'POST',
-            url: "modules/products/controller/controller_products.class.php?details_redirect=true",
+            url: "../details_redirect/",
             data: "item_cod_prod="+item.cod_prod,
             //dataType: 'json',
             async: false
@@ -57,10 +57,10 @@ function create_html_product(item){
             window.location.href="index.php?module=404";
         });
     });
-    /* aTag.setAttribute("href", "index.php?module=products&details_redirect="+item.cod_prod); */
+    /* aTag.setAttribute("href", "none"); */
     var imgTag = document.createElement("img");
     imgTag.setAttribute("class", "prodImg");
-    imgTag.setAttribute("src", item.avatar);
+    imgTag.setAttribute("src", "../../"+item.avatar);
     imgTag.setAttribute("width", "200px");
     imgTag.setAttribute("height", "200px");
     imgTag.setAttribute("alt", "Foto Producto");
@@ -76,7 +76,7 @@ function create_html_product(item){
 function clear_limit(){
     $.ajax({
         type: 'GET',
-        url: "modules/products/controller/controller_products.class.php?clear_limit=true",
+        url: "../clear_limit/",
         async:false
     }).fail(function (xhr){
         alert(xhr.responseText);

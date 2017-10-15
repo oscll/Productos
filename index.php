@@ -1,4 +1,6 @@
 <?php
+require_once 'router/router.php';
+/* 
 	session_start();
 	$_SESSION['result_avatar'] = array();
 	require_once("view/inc/header.php");
@@ -24,3 +26,4 @@
 	}
 
 require_once("view/inc/footer.php");
+ */

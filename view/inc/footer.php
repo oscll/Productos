@@ -20,12 +20,12 @@
 
 
 <!-- Javascript -->
-<script src="view/js/jquery.backstretch.min.js"></script>
-<script src="view/bootstrap/js/bootstrap.min.js"></script>
-<script src="view/js/wow.min.js"></script>
-<script src="view/js/retina-1.1.0.min.js"></script>
-<script src="view/js/waypoints.min.js"></script>
-<script src="view/js/scripts.js"></script>
+<script src=<?php echo VIEW_JS_PATH."/jquery.backstretch.min.js"?>></script>
+<script src=<?php echo VIEW_BOOTSTRAP_PATH."/js/bootstrap.min.js"?>></script>
+<script src=<?php echo VIEW_JS_PATH."/wow.min.js"?>></script>
+<script src=<?php echo VIEW_JS_PATH."/retina-1.1.0.min.js"?>></script>
+<script src=<?php echo VIEW_JS_PATH."/waypoints.min.js"?>></script>
+<script src=<?php echo VIEW_JS_PATH."/scripts.js"?>></script>
 
 <!--[if lt IE 10]>
     <script src="view/js/placeholder.js"></script>
