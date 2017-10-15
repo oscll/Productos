@@ -22,15 +22,15 @@ function filter_string($cad) {
 
             $modelClass = $model_name;
             if (!method_exists($modelClass, $function)){
-                die($function . ' function not found in Model ' . $model_name);
+                throw new Exception();                
             }
             
             $obj = $modelClass::getInstance();
             if (isset($arrArgument)) { 
-                return $obj->$function($arrArgument);
+                return call_user_func(array($obj, $function),$arrArgument);//cambiar a array como en router
             }else{
                 try{
-                    return $obj->$function();
+                    return call_user_func(array($obj, $function));//cambiar a array como en router
                 }catch(Exception $e){
                     header('HTTP/1.0 403 Bad error');
                     echo json_encode("no existe arrArgument");  

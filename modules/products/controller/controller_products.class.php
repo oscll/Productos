@@ -24,7 +24,7 @@ class controller_products{
             
             $arrValue = false;
             try{    
-                $arrValue = loadModel(MODEL_PRODUCTS, "product_model", "create_product", $datos);    
+                $arrValue = loadModel(MODEL_PRODUCTS, "products_model", "create_product", $datos);    
             }catch(Exception $e){
 
             }
@@ -106,7 +106,7 @@ class controller_products{
         $json = array();
         $url = 'http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso/ListOfCountryNamesByName/JSON';
         try{
-            $json = loadModel(MODEL_PRODUCTS, "product_model", "obtain_countries", $url);    
+            $json = loadModel(MODEL_PRODUCTS, "products_model", "obtain_countries", $url);    
         }catch(Exception $e){
             $json = array();
         }
@@ -122,7 +122,7 @@ class controller_products{
     function load_provinces(){
         $jsondata = array();
         $json = array();
-        $json = loadModel(MODEL_PRODUCTS, "product_model", "obtain_provinces");
+        $json = loadModel(MODEL_PRODUCTS, "products_model", "obtain_provinces");
         if($json){
             $jsondata["provinces"] = $json;
             echo json_encode($jsondata);
@@ -137,7 +137,7 @@ class controller_products{
     function load_citys(){
         $jsondata = array();
         $json = array();    
-        $json = loadModel(MODEL_PRODUCTS, "product_model", "obtain_cities", $_POST['idPoblac']);
+        $json = loadModel(MODEL_PRODUCTS, "products_model", "obtain_cities", $_POST['idPoblac']);
     
         if($json){
             $jsondata["cities"] = $json;
@@ -152,7 +152,7 @@ class controller_products{
 ////////FrontEnd
     function list_products(){
         $rows=5;
-        $json = loadModel(MODEL_PRODUCTS, "product_model", "list_products",$_SESSION['limit'].", $rows");
+        $json = loadModel(MODEL_PRODUCTS, "products_model", "list_products",$_SESSION['limit'].", $rows");
         $_SESSION['limit']+=$rows;
         echo json_encode($json);
         exit;
@@ -172,7 +172,7 @@ class controller_products{
 
     function details_product(){
         if(isset($_SESSION["item_cod_prod"])){
-            $json = loadModel(MODEL_PRODUCTS, "product_model", "details_product", $_SESSION["item_cod_prod"]);
+            $json = loadModel(MODEL_PRODUCTS, "products_model", "details_product", $_SESSION["item_cod_prod"]);
             echo json_encode($json);
         }else{
             header('HTTP/1.0 400 Bad error');

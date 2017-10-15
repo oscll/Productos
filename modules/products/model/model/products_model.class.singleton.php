@@ -1,14 +1,10 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '/Productos/';
-define('SITE_ROOT', $path);
-require(SITE_ROOT . "modules/products/model/BLL/product_bll.class.singleton.php");
-
-class product_model {
+class products_model {
     private $bll;
     static $_instance;
 
     private function __construct() {
-        $this->bll = product_bll::getInstance();
+        $this->bll = products_bll::getInstance();
     }
 
     public static function getInstance() {
